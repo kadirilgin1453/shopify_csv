@@ -157,8 +157,8 @@ class Image(Validator):
         if not isinstance(value, str):
             if value is None:
                 raise ValueError(f"Field '{self.private_name[1:]}' is missing.")
-            if not isinstance(value, str):
-                raise ValueError(f"Expected a str for '{self.private_name[1:]}'.")
+        if not isinstance(value, str):
+            raise ValueError(f"Expected a str for '{self.private_name[1:]}'.")
         for wrong_ending in ["_thumb", "_small", "_medium"]:
             if value.endswith(wrong_ending):
                 raise ValueError(

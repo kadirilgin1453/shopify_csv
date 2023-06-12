@@ -100,26 +100,20 @@ class ShopifyRow:
                 "variant_price",
             ]
 
-        elif is_variant:
+        else:
             not_empty = [
                 "handle",
             ]
             should_be_empty = ["title", "body_html", "vendor", "tags"]
 
-        missing_fields = []
-        for attr in not_empty:
-            if getattr(self, attr, "") == "":
-                missing_fields.append(attr)
-
-        if missing_fields:
+        if missing_fields := [
+            attr for attr in not_empty if getattr(self, attr, "") == ""
+        ]:
             raise ValueError(f"{', '.join(missing_fields)} can't be empty")
 
-        fields_should_be_empty = []
-        for attr in should_be_empty:
-            if getattr(self, attr, "") != "":
-                fields_should_be_empty.append(attr)
-
-        if fields_should_be_empty:
+        if fields_should_be_empty := [
+            attr for attr in should_be_empty if getattr(self, attr, "") != ""
+        ]:
             raise ValueError(f"{', '.join(fields_should_be_empty)} should be empty")
 
     @property

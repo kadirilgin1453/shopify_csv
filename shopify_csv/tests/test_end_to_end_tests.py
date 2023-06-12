@@ -6,19 +6,17 @@ from shopify_csv import ShopifyRow
 
 def get_template_rows():
     with open(
-        os.path.join(
-            os.getcwd(), "shopify_csv", "tests", "fixtures", "product_template.csv"
-        ),
-        "r",
-    ) as file:
+            os.path.join(
+                os.getcwd(), "shopify_csv", "tests", "fixtures", "product_template.csv"
+            ),
+            "r",
+        ) as file:
         reader = csv.reader(file, delimiter=";")
-        return [row for row in reader]
+        return list(reader)
 
 
 def get_shopify_rows():
-    return_rows = []
-
-    return_rows.append(ShopifyRow.FIELDS)
+    return_rows = [ShopifyRow.FIELDS]
 
     row = ShopifyRow()
     row.handle = "example-product"
